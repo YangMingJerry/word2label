@@ -8,7 +8,10 @@ class Novel():
         self.book_labeled = book_labeled
 
     def label(self):
-        jieba.load_userdict(self.dict)
+        if self.dict:
+            jieba.load_userdict(self.dict)
+        else:
+            print('====WARNING:NO DICT LOADED INTO MODEL')
         path_read = self.book
         path_write = self.book_labeled
         with open(path_read, 'r') as file_raw:
@@ -31,9 +34,6 @@ class Novel():
                         for i in range(len(char)):
                             file_write.write("{}\n".format(char[i]+temp[i]))
 
-
-my_hot_landlord = Novel('my_hot_landlord.txt','dict_test.txt','res.txt')
-my_hot_landlord.label()
 
 
 
